@@ -3,7 +3,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import pool from "./config/db";
 import { PoolConnection } from "mysql2/promise";
+import globalErrorHandler from "./middleware/globalErrorHandler";
 import expenseRoutes from "./routes/expenseRoutes";
+import authRoutes from "./routes/authRoutes";
 
 dotenv.config();
 
@@ -13,7 +15,10 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+app.use("/api/auth", authRoutes);
 app.use("/api/expense", expenseRoutes);
+
+app.use(globalErrorHandler);
 
 pool
   .getConnection()
