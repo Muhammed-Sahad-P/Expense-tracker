@@ -47,3 +47,12 @@ export const loginUser = async (req: Request, res: Response) => {
 
   res.status(200).json({ message: "Login successful", token });
 };
+
+//get all users
+export const getAllUsers = async (req: Request, res: Response) => {
+  const users = await userModel.getAllUsers();
+
+  if (!users) return res.status(404).json({ message: "No users found" });
+
+  res.status(200).json(users);
+};

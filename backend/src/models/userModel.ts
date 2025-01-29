@@ -26,6 +26,19 @@ export const createUser = async (user: User) => {
   }
 };
 
+// Retrieve all users from the database
+export const getAllUsers = async () => {
+  try {
+    const [rows]: any = await pool.query(
+      "SELECT id, username, email FROM users"
+    );
+    return rows;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw new Error("Error fetching users");
+  }
+};
+
 // Retrieve a user by their username
 export const getUserByUsername = async (username: string) => {
   try {
