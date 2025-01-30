@@ -1,48 +1,38 @@
-import db from "../config/db";
+import pool from "../config/db";
 
-interface Expense {
-  id: string;
-  userId: number;
+export interface Expense {
+  id?: number;
+  user_id: number;
   amount: number;
   description: string;
   category: string;
   date: string;
 }
 
-export const addExpense = async (expense: Expense): Promise<void> => {
-  const query = `INSERT INTO expenses (user_id, amount, description, category, date) VALUES (?, ?, ?, ?, ?)`;
-  try {
-    await db.query(query, [
-      expense.userId,
-      expense.amount,
-      expense.description,
-      expense.category,
-      expense.date,
-    ]);
-  } catch (error) {
-    throw new Error(`Failed to add expense: ${(error as Error).message}`);
-  }
+// Add an expense
+export const addExpense = async (expense: Expense) => {
+  const query =
+    "INSERT INTO expenses (user_id, amount, description, category, date) VALUES (?, ?, ?, ?, ?)";
+  await pool.query(query, [
+    expense.user_id,
+    expense.amount,
+    expense.description,
+    expense.category,
+    expense.date,
+  ]);
 };
 
-// Function to get all expenses
-export const getAllExpenses = async (): Promise<any> => {
-  const query = "SELECT * FROM expenses";
-  try {
-    const [results] = await db.query(query);
-    return results;
-  } catch (error) {
-    throw new Error(`Failed to retrieve expenses: ${(error as Error).message}`);
-  }
+// Get all expenses for a user
+export const getAllExpenses = async (userId: number) => {
+  const [rows]: any = await pool.query(
+    "SELECT * FROM expenses WHERE user_id = ?",
+    [userId]
+  );
+  return rows;
 };
 
-// Function to delete an expense
-export const deleteExpense = async (id: string): Promise<void> => {
-  const query = "DELETE FROM expenses WHERE id = ?";
-  try {
-    await db.query(query, [id]);
-  } catch (error) {
-    throw new Error(`Failed to delete expense: ${(error as Error).message}`);
-  }
+// Delete an expense
+export const deleteExpense = async (expenseId: number, userId: number) => {
+  const query = "DELETE FROM expenses WHERE id = ? AND user_id = ?";
+  await pool.query(query, [expenseId, userId]);
 };
-
-export default { addExpense, getAllExpenses, deleteExpense };
