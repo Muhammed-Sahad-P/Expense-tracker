@@ -7,7 +7,7 @@ interface Income {
   date: string;
 }
 
-//add an income entry
+// Add an income entry
 export const addIncome = async (income: Income) => {
   const query =
     "INSERT INTO incomes (user_id, amount, source, date) VALUES (?, ?, ?, ?)";
@@ -27,6 +27,13 @@ export const getAllIncomes = async (userId: number) => {
   return rows;
 };
 
+// Check if income exists and belongs to the user
+export const checkIncomeExists = async (incomeId: number, userId: number) => {
+  const query = "SELECT * FROM incomes WHERE id = ? AND user_id = ?";
+  const [result]: any = await pool.query(query, [incomeId, userId]);
+  return result.length > 0;
+};
+
 // Update an income entry
 export const updateIncome = async (
   incomeId: number,
@@ -42,7 +49,6 @@ export const updateIncome = async (
     incomeId,
     userId,
   ]);
-
   return result.affectedRows > 0;
 };
 
@@ -50,6 +56,5 @@ export const updateIncome = async (
 export const deleteIncome = async (incomeId: number, userId: number) => {
   const query = "DELETE FROM incomes WHERE id = ? AND user_id = ?";
   const [result]: any = await pool.query(query, [incomeId, userId]);
-
   return result.affectedRows > 0;
 };

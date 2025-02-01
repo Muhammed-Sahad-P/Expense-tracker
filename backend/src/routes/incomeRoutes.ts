@@ -5,7 +5,7 @@ import {
   updateIncome,
   deleteIncome,
 } from "../controllers/incomeController";
-import errorCatch from "../lib/utils/errorCatch";
+import errorCatch from "../utils/errorCatch";
 import { authMiddleware } from "../middleware/authMiddleware";
 
 const router = express.Router();

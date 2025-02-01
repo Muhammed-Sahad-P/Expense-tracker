@@ -11,8 +11,10 @@ export interface Expense {
 
 // Add an expense
 export const addExpense = async (expense: Expense) => {
-  const query =
-    "INSERT INTO expenses (user_id, amount, description, category, date) VALUES (?, ?, ?, ?, ?)";
+  const query = `
+    INSERT INTO expenses (user_id, amount, description, category, date)
+    VALUES (?, ?, ?, ?, ?)
+  `;
   await pool.query(query, [
     expense.user_id,
     expense.amount,
@@ -29,6 +31,36 @@ export const getAllExpenses = async (userId: number) => {
     [userId]
   );
   return rows;
+};
+
+// Check if an expense exists and belongs to the user
+export const getExpenseById = async (expenseId: number, userId: number) => {
+  const [rows]: any = await pool.query(
+    "SELECT * FROM expenses WHERE id = ? AND user_id = ?",
+    [expenseId, userId]
+  );
+  return rows.length ? rows[0] : null;
+};
+
+// Update expense
+export const updateExpense = async (
+  expenseId: number,
+  userId: number,
+  expense: Expense
+) => {
+  const query = `
+    UPDATE expenses
+    SET amount = ?, description = ?, category = ?, date = ?
+    WHERE id = ? AND user_id = ?
+  `;
+  await pool.query(query, [
+    expense.amount,
+    expense.description,
+    expense.category,
+    expense.date,
+    expenseId,
+    userId,
+  ]);
 };
 
 // Delete an expense

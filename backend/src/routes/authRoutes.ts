@@ -5,7 +5,7 @@ import {
   register,
 } from "../controllers/userController";
 import { authMiddleware } from "../middleware/authMiddleware";
-import errorCatch from "../lib/utils/errorCatch";
+import errorCatch from "../utils/errorCatch";
 
 const router = express.Router();
 
