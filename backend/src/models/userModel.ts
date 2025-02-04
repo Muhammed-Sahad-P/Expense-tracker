@@ -41,20 +41,15 @@ export const getAllUsers = async () => {
 
 // Retrieve a user by their username
 export const getUserByUsername = async (username: string) => {
-  try {
-    const [rows]: any = await pool.query(
-      "SELECT id, username, email, password FROM users WHERE username = ?",
-      [username]
-    );
+  const [rows]: any = await pool.query(
+    "SELECT * FROM users WHERE username = ?",
+    [username]
+  );
 
-    if (rows.length === 0) {
-      return null;
-    }
-    return rows[0];
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    throw new Error("Error fetching user");
-  }
+  if (!rows.length) return null;
+
+  console.log("📌 User fetched from DB:", rows[0]); // Debugging log
+  return rows[0];
 };
 
 // Compare a plaintext password with a hashed password from DB

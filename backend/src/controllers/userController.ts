@@ -32,7 +32,8 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 
   const user = await userModel.getUserByUsername(username);
-  if (!user) {
+
+  if (!user || !user.id) {
     return res.status(404).json(new StandardResponse("User not found"));
   }
 
