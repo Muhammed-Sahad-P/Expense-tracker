@@ -19,7 +19,7 @@ export default function AddExpense() {
 
     return (
         <form onSubmit={handleSubmit} className="p-4 border rounded">
-            <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required className="p-2 border rounded w-full mb-2" />
+            <input type="text" placeholder="Description" value={title} onChange={(e) => setTitle(e.target.value)} required className="p-2 border rounded w-full mb-2" />
             <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required className="p-2 border rounded w-full mb-2" />
             <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required className="p-2 border rounded w-full mb-2" />
             <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full">Add Expense</button>

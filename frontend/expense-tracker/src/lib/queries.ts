@@ -8,8 +8,7 @@ export const useGetExpenses = () => {
     queryKey: ["expenses"],
     queryFn: async () => {
       const response = await apiClient.get("/expense/totals");
-      console.log(response);
-      return response.data;
+      return response.data.message;
     },
   });
 };
@@ -23,8 +22,19 @@ export const useAddExpense = () => {
       category: string;
       date: string;
     }) => {
-      const response = await apiClient.post("/expenses", expense);
-      console.log(response);
+      const formattedDate = new Date(expense.date)
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ");
+
+      const formattedExpense = {
+        description: expense.title,
+        amount: Number(expense.amount),
+        category: expense.category,
+        date: formattedDate,
+      };
+
+      const response = await apiClient.post("/expense", formattedExpense);
       return response.data;
     },
     onSuccess: () => {

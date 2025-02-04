@@ -1,4 +1,5 @@
 import { apiClient } from "./api";
+import Cookies from "js-cookie";
 
 export const signup = async (user: {
   username: string;
@@ -14,5 +15,13 @@ export const login = async (credentials: {
   password: string;
 }) => {
   const response = await apiClient.post("/auth/login", credentials);
+
+  const token = response.data?.data?.user?.token;
+  if (token) {
+    Cookies.set("token", token);
+  } else {
+    console.error("⚠️ No token received from backend");
+  }
+
   return response.data;
 };

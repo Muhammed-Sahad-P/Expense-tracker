@@ -3,10 +3,11 @@
 import { useGetExpenses } from '@/lib/queries';
 
 interface Expense {
-    id: string;
-    title: string;
-    amount: number;
+    id: number;
+    amount: string;
+    description: string;
     category: string;
+    date: string;
 }
 
 export default function ExpenseList() {
@@ -15,11 +16,15 @@ export default function ExpenseList() {
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Failed to load expenses.</p>;
 
+    if (!Array.isArray(expenses)) {
+        return <p>No expenses found.</p>;
+    }
+
     return (
         <ul className="mt-4">
-            {expenses?.map((expense: Expense) => (
+            {expenses.map((expense: Expense) => (
                 <li key={expense.id} className="border p-2 rounded mb-2">
-                    {expense.title} - ${expense.amount} ({expense.category})
+                    {expense.description} - ${expense.amount} ({expense.category})
                 </li>
             ))}
         </ul>
