@@ -9,13 +9,22 @@ export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { setUser } = useAuthStore();
-
     const { mutate, isPending, error } = useMutation({
         mutationFn: login,
         onSuccess: (data) => {
-            setUser({ username: data.username, email: data.email });
+            const userData = data?.data?.user;
+            if (userData?.token) {
+                setUser(
+                    {
+                        username: userData.username,
+                        email: userData.email,
+                    },
+                    userData.token
+                );
+            }
         },
     });
+
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();

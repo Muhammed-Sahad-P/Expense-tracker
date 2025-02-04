@@ -47,7 +47,16 @@ export const loginUser = async (req: Request, res: Response) => {
 
   const token = generateToken(user.id);
 
-  res.status(200).json(new StandardResponse("Login successful", { token }));
+  res.status(200).json(
+    new StandardResponse("Login successful", {
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        token,
+      },
+    })
+  );
 };
 
 //get all users
