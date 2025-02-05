@@ -1,25 +1,32 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
-import { LayoutDashboard, CreditCard, DollarSign, User } from 'lucide-react';
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { LayoutDashboard, CreditCard, DollarSign } from "lucide-react";
+import { useAuthStore } from "@/lib/store/useAuthStore";
 
 export default function Sidebar() {
-    const [isOpen, setIsOpen] = useState(true);
+    const { user } = useAuthStore();
+    const [isLargeScreen, setIsLargeScreen] = useState(true);
+
+    useEffect(() => {
+        const checkScreenSize = () => setIsLargeScreen(window.innerWidth >= 1024);
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
+
+    if (!user || !isLargeScreen) return null;
 
     return (
-        <div className={`h-screen bg-gray-900 text-white transition-all ${isOpen ? 'w-64' : 'w-20'}`}>
-            <div className="p-4 flex items-center justify-between">
-                <h1 className={`text-xl font-bold transition-all ${isOpen ? 'block' : 'hidden'}`}>Dashboard</h1>
-                <button onClick={() => setIsOpen(!isOpen)} className="text-white">
-                    {isOpen ? '⬅' : '➡'}
-                </button>
+        <div className="h-screen w-64 bg-white text-black shadow-md fixed top-0 left-0">
+            <div className="p-6">
+                <h1 className="text-xl font-bold">Dashboard</h1>
             </div>
-            <nav className="mt-4">
-                <SidebarItem href="/" icon={<LayoutDashboard />} text="Dashboard" isOpen={isOpen} />
-                <SidebarItem href="/expense" icon={<CreditCard />} text="Expenses" isOpen={isOpen} />
-                <SidebarItem href="/income" icon={<DollarSign />} text="Income" isOpen={isOpen} />
-                <SidebarItem href="/profile" icon={<User />} text="Profile" isOpen={isOpen} />
+            <nav className="mt-4 px-6">
+                <SidebarItem href="/dashboard" icon={<LayoutDashboard />} text="Dashboard" />
+                <SidebarItem href="/expense" icon={<CreditCard />} text="Expenses" />
+                <SidebarItem href="/income" icon={<DollarSign />} text="Income" />
             </nav>
         </div>
     );
@@ -29,12 +36,11 @@ interface SidebarItemProps {
     href: string;
     icon: React.ReactNode;
     text: string;
-    isOpen: boolean;
 }
 
-const SidebarItem = ({ href, icon, text, isOpen }: SidebarItemProps) => (
-    <Link href={href} className="flex items-center gap-3 p-3 hover:bg-gray-800 rounded-md transition-all">
+const SidebarItem = ({ href, icon, text }: SidebarItemProps) => (
+    <Link href={href} className="flex items-center gap-3 p-3 hover:bg-gray-200 rounded-md transition-all">
         {icon}
-        <span className={`${isOpen ? 'block' : 'hidden'}`}>{text}</span>
+        <span>{text}</span>
     </Link>
 );
