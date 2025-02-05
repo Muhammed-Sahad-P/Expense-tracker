@@ -2,6 +2,7 @@
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import ExpenseList from "@/components/ExpenseList";
+import IncomeList from "./Income/IncomeList";
 
 const data = [
     { name: "Jan", Income: 4000, Expenses: 2400 },
@@ -19,6 +20,10 @@ export default function Dashboard() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
+                <div className="bg-white shadow-lg rounded-lg p-6">
+                    <h2 className="text-xl font-semibold text-gray-700 mb-4">Recent Incomes</h2>
+                    <IncomeList />
+                </div>
                 <div className="bg-white shadow-lg rounded-lg p-6">
                     <h2 className="text-xl font-semibold text-gray-700 mb-4">Recent Expenses</h2>
                     <ExpenseList />

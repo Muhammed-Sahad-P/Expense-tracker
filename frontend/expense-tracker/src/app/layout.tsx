@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <div className="flex h-screen pt-16">
             {user && (
-              <aside className="hidden md:block w-64 bg-gray-900 text-white">
+              <aside className="hidden md:block w-64">
                 <Sidebar />
               </aside>
             )}
