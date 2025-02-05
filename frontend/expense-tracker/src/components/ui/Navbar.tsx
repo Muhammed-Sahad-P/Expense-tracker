@@ -24,9 +24,9 @@ export default function Navbar() {
     if (!hydrated) return null;
 
     return (
-        <nav className="bg-white text-black fixed top-0 left-0 w-full z-50">
-            <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-                <h1 className="text-2xl font-bold text-gray-800">Expense Tracker</h1>
+        <nav className="bg-white text-black shadow-md fixed top-0 left-0 w-full z-50">
+            <div className="max-w-7xl mx-auto py-6 flex justify-between items-center">
+                <h1 className="text-2xl font-bold  text-gray-800">Expense Tracker</h1>
 
                 <div className="hidden md:flex items-center gap-6">
                     {user ? (

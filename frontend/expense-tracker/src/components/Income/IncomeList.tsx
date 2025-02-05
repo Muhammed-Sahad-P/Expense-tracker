@@ -25,18 +25,18 @@ export default function IncomeList() {
         <div className="max-w-lg mx-auto mt-6">
             <ul className="space-y-3">
                 {incomes.map((income: Income) => (
-                    <li key={income.id} className="bg-white shadow-lg rounded-lg p-4 flex items-center justify-between">
+                    <li key={income.id} className="bg-[#3A4046] shadow-lg rounded-lg p-4 flex items-center justify-between">
                         <div>
                             <p className="text-black flex items-center gap-2 text-sm">
-                                <Calendar className="text-black" size={16} />
+                                <Calendar className="text-[#FAD350]" size={16} />
                                 {new Date(income.date).toLocaleDateString()}
                             </p>
                         </div>
                         <div>
-                            <span className="bg-blue-100 text-green-600 text-sm px-3 py-1 rounded-md flex items-center gap-1">
-                                <Tag size={14} /> {income.source}
+                            <span className="bg-blue-100 text-green-600 text-[10px] p-1 rounded-md flex items-center gap-1">
+                                <Tag size={12} /> {income.source}
                             </span>
-                            <p className="text-lg font-bold text-gray-900">${income.amount}</p>
+                            <p className="text-md font-poppins text-white">₹{income.amount}</p>
                         </div>
                     </li>
                 ))}

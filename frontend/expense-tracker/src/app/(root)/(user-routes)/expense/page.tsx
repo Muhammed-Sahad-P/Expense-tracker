@@ -1,4 +1,4 @@
-import AddExpense from "@/components/AddExpenses";
+import AddExpense from "@/components/Expense/AddExpenses";
 
 
 export default function Home() {
