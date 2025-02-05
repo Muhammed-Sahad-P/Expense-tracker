@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiClient } from "./api";
+import { apiClient } from "../api";
 
 export const useGetExpenses = () => {
   return useQuery({
