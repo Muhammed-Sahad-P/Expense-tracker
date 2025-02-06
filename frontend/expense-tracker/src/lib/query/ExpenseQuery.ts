@@ -42,3 +42,37 @@ export const useAddExpense = () => {
     },
   });
 };
+
+export const useUpdateExpense = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({id, data}: {
+      id: number;
+      data: {
+        description: string;
+        amount: number;
+        category: string;
+        date: string;
+      }
+    }) => {
+      const response = await apiClient.put(`/expense/${id}`, data);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["expenses"] });
+    },
+  });
+};
+
+export const useDeleteExpense = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (expenseId: number) => {
+      const response = await apiClient.delete(`/expense/${expenseId}`);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["expenses"] });
+    },
+  });
+};

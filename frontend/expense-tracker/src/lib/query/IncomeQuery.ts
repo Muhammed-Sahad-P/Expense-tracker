@@ -40,3 +40,39 @@ export const useAddIncome = () => {
     },
   });
 };
+
+export const useUpdateIncome = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({
+      id,
+      data,
+    }: {
+      id: number;
+      data: {
+        source: string;
+        amount: number;
+        date: string;
+      };
+    }) => {
+      const response = await apiClient.put(`/income/${id}`, data);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["incomes"] });
+    },
+  });
+};
+
+export const useDeleteIncome = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (incomeId: number) => {
+      const response = await apiClient.delete(`/income/${incomeId}`);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["incomes"] });
+    },
+  });
+};
