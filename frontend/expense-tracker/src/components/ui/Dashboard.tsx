@@ -26,18 +26,18 @@ const COLORS = ["#16A34A", "#DC2626"];
 export default function Dashboard() {
     return (
         <div className="flex flex-col p-6 text-center font-poppins bg-[#3A4046] h-[calc(100vh-4rem)] ">
-            <h2 className="text-3xl font-extrabold text-[#FAD350] mb-6">Expense & Income Overview</h2>
+            <h2 className="text-3xl font-extrabold text-[#FAD350] mb-2">Expense & Income Overview</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <h2 className="text-xl font-semibold text-[#FAD350] mb-2">Recent Incomes</h2>
+                    <h2 className="text-base font-semibold text-[#FAD350] mb-2">Recent Incomes</h2>
                     <div className="bg-[#1D2329] shadow-lg rounded-xl p-4 max-h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
                         <IncomeList />
                     </div>
                 </div>
 
                 <div>
-                    <h2 className="text-xl font-semibold text-[#FAD350] mb-2">Recent Expenses</h2>
+                    <h2 className="text-base font-semibold text-[#FAD350] mb-2">Recent Expenses</h2>
                     <div className="bg-[#1D2329] shadow-lg rounded-xl p-4 max-h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
                         <ExpenseList />
                     </div>
