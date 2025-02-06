@@ -2,7 +2,7 @@
 
 import Providers from "@/components/ui/Provider";
 import "./globals.css";
-import Sidebar from "@/components/ui/Sidebar";
+import Sidebar from "@/components/ui/Sidebar/Sidebar";
 import { useAuthStore } from "@/lib/store/useAuthStore";
 import { useEffect, useState } from "react";
 

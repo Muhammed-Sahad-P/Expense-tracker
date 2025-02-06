@@ -25,7 +25,7 @@ export default function ExpenseList() {
         <div className="max-w-lg mx-auto mt-6">
             <ul className="space-y-3">
                 {expenses.map((expense: Expense) => (
-                    <li key={expense.id} className="bg-[#3A4046] shadow-lg rounded-lg p-4 flex items-center justify-between">
+                    <li key={expense.id} className="bg-[#3A4046] shadow-lg rounded-lg p-2 flex items-center justify-between">
                         <div>
                             <p className="text-white text-sm font-semibold flex items-center gap-2">
                                 <CreditCard className="text-red-500" size={16} /> {expense.description}

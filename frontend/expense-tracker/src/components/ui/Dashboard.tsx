@@ -25,32 +25,36 @@ const COLORS = ["#16A34A", "#DC2626"];
 
 export default function Dashboard() {
     return (
-        <div className="p-8 mt-10 text-center font-poppins bg-[#3A4046] min-h-screen">
-            <h2 className="text-4xl font-extrabold text-[#FAD350] mb-8"> Expense & Income Overview</h2>
+        <div className="flex flex-col p-6 text-center font-poppins bg-[#3A4046] h-[calc(100vh-4rem)] ">
+            <h2 className="text-3xl font-extrabold text-[#FAD350] mb-6">Expense & Income Overview</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-8">
-                <div className="bg-[#1D2329] shadow-lg rounded-xl p-6">
-                    <h2 className="text-2xl font-semibold text-[#FAD350] mb-4"> Recent Incomes</h2>
-                    <IncomeList />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h2 className="text-xl font-semibold text-[#FAD350] mb-2">Recent Incomes</h2>
+                    <div className="bg-[#1D2329] shadow-lg rounded-xl p-4 max-h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
+                        <IncomeList />
+                    </div>
                 </div>
 
-                <div className="bg-[#1D2329] shadow-lg rounded-xl p-6">
-                    <h2 className="text-2xl font-semibold text-[#FAD350] mb-4"> Recent Expenses</h2>
-                    <ExpenseList />
+                <div>
+                    <h2 className="text-xl font-semibold text-[#FAD350] mb-2">Recent Expenses</h2>
+                    <div className="bg-[#1D2329] shadow-lg rounded-xl p-4 max-h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
+                        <ExpenseList />
+                    </div>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                <div className="bg-[#1D2329] shadow-lg rounded-xl p-6">
-                    <h2 className="text-2xl font-semibold text-[#FAD350] mb-4">📊 Income vs Expenses Breakdown</h2>
-                    <ResponsiveContainer width="100%" height={300}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 mt-6">
+                <div className="bg-[#1D2329] shadow-lg rounded-xl p-6 flex flex-col items-center justify-center h-[350px]">
+                    <h2 className="text-xl font-semibold text-[#FAD350] mb-4">Income vs Expenses Breakdown</h2>
+                    <ResponsiveContainer width="100%" height={250}>
                         <PieChart>
                             <Pie
                                 data={pieData}
                                 cx="50%"
                                 cy="50%"
                                 innerRadius={70}
-                                outerRadius={120}
+                                outerRadius={100}
                                 paddingAngle={2}
                                 dataKey="value"
                                 label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
@@ -65,9 +69,9 @@ export default function Dashboard() {
                     </ResponsiveContainer>
                 </div>
 
-                <div className="bg-[#1D2329] shadow-lg rounded-xl p-6">
-                    <h2 className="text-2xl font-semibold text-[#FAD350] mb-4">📊 Income vs Expenses</h2>
-                    <ResponsiveContainer width="100%" height={350}>
+                <div className="bg-[#1D2329] shadow-lg rounded-xl p-6 flex flex-col items-center justify-center h-[350px]">
+                    <h2 className="text-xl font-semibold text-[#FAD350] mb-4">Income vs Expenses</h2>
+                    <ResponsiveContainer width="100%" height={250}>
                         <BarChart data={data}>
                             <XAxis dataKey="name" stroke="#8884d8" />
                             <YAxis />

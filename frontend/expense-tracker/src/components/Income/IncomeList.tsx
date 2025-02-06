@@ -25,7 +25,7 @@ export default function IncomeList() {
         <div className="max-w-lg mx-auto mt-6">
             <ul className="space-y-3">
                 {incomes.map((income: Income) => (
-                    <li key={income.id} className="bg-[#3A4046] shadow-lg rounded-lg p-4 flex items-center justify-between">
+                    <li key={income.id} className="bg-[#3A4046] shadow-lg rounded-lg p-2 flex items-center justify-between">
                         <div>
                             <p className="text-black flex items-center gap-2 text-sm">
                                 <Calendar className="text-[#FAD350]" size={16} />

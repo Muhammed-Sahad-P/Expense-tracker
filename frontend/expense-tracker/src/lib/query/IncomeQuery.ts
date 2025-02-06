@@ -26,13 +26,13 @@ export const useAddIncome = () => {
         .slice(0, 19)
         .replace("T", " ");
 
-      const formattedExpense = {
-        description: income.source,
+      const formattedIncome = {
+        source: income.source,
         amount: Number(income.amount),
         date: formattedDate,
       };
 
-      const response = await apiClient.post("/income", formattedExpense);
+      const response = await apiClient.post("/income", formattedIncome);
       return response.data;
     },
     onSuccess: () => {
