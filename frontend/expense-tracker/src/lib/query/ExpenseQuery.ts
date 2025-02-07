@@ -8,6 +8,7 @@ export const useGetExpenses = () => {
     queryKey: ["expenses"],
     queryFn: async () => {
       const response = await apiClient.get("/expense/totals");
+      console.log(response.data);
       return response.data.message;
     },
   });
@@ -46,14 +47,17 @@ export const useAddExpense = () => {
 export const useUpdateExpense = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({id, data}: {
+    mutationFn: async ({
+      id,
+      data,
+    }: {
       id: number;
       data: {
         description: string;
         amount: number;
         category: string;
         date: string;
-      }
+      };
     }) => {
       const response = await apiClient.put(`/expense/${id}`, data);
       return response.data;
