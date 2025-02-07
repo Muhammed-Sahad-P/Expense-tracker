@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAddExpense } from "@/lib/query/ExpenseQuery";
 
-export const AddExpenseForm = () => {
+export const AddExpenseForm = ({ onSuccess }: { onSuccess: () => void }) => {
     const [title, setTitle] = useState("");
     const [expenseAmount, setExpenseAmount] = useState("");
     const [category, setCategory] = useState("");
@@ -13,6 +13,7 @@ export const AddExpenseForm = () => {
         setTitle("");
         setExpenseAmount("");
         setCategory("");
+        onSuccess();
     };
 
     return (

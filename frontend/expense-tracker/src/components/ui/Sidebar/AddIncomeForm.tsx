@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAddIncome } from "@/lib/query/IncomeQuery";
 
-export const AddIncomeForm = () => {
+export const AddIncomeForm = ({ onSuccess }: { onSuccess: () => void }) => {
     const [source, setSource] = useState("");
     const [amount, setAmount] = useState("");
     const { mutate: mutateIncome } = useAddIncome();
@@ -21,6 +21,7 @@ export const AddIncomeForm = () => {
         });
         setSource("");
         setAmount("");
+        onSuccess();
     };
 
     return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LayoutDashboard, PlusCircle } from "lucide-react";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { SidebarItem } from "./SideBarItems";
@@ -9,16 +9,8 @@ import { AddIncomeForm } from "./AddIncomeForm";
 import { UserSection } from "./UserSection";
 
 export default function Sidebar() {
-  const [isLargeScreen, setIsLargeScreen] = useState(true);
-
-  useEffect(() => {
-    const checkScreenSize = () => setIsLargeScreen(window.innerWidth >= 1024);
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
-
-  if (!isLargeScreen) return null;
+  const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
+  const [isIncomeModalOpen, setIsIncomeModalOpen] = useState(false);
 
   return (
     <div className="h-[95vh] w-60 bg-[#1D2329] text-black shadow-lg fixed top-3 left-3 flex flex-col justify-between rounded-2xl p-4">
@@ -27,7 +19,7 @@ export default function Sidebar() {
         <SidebarItem href="/dashboard" icon={<LayoutDashboard />} text="Dashboard" />
         <SidebarItem href="/transaction" icon={<LayoutDashboard />} text="Transactions" />
 
-        <Dialog>
+        <Dialog open={isExpenseModalOpen} onOpenChange={setIsExpenseModalOpen}>
           <DialogTrigger asChild>
             <button className="flex items-center gap-3 p-3 hover:bg-[#3A4046] rounded-lg transition-all">
               <PlusCircle />
@@ -40,11 +32,11 @@ export default function Sidebar() {
                 <PlusCircle className="text-[#FAD350]" /> Add New Expense
               </DialogTitle>
             </DialogHeader>
-            <AddExpenseForm />
+            <AddExpenseForm onSuccess={() => setIsExpenseModalOpen(false)} />
           </DialogContent>
         </Dialog>
 
-        <Dialog>
+        <Dialog open={isIncomeModalOpen} onOpenChange={setIsIncomeModalOpen}>
           <DialogTrigger asChild>
             <button className="flex items-center gap-3 p-3 hover:bg-[#3A4046] rounded-lg transition-all">
               <PlusCircle />
@@ -57,7 +49,7 @@ export default function Sidebar() {
                 <PlusCircle className="text-[#FAD350]" /> Add New Income
               </DialogTitle>
             </DialogHeader>
-            <AddIncomeForm />
+            <AddIncomeForm onSuccess={() => setIsIncomeModalOpen(false)} />
           </DialogContent>
         </Dialog>
       </nav>
