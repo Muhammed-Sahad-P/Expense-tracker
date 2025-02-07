@@ -10,6 +10,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
+interface ErrorResponse {
+    response: {
+        data: {
+            message: string;
+        };
+    };
+}
 export default function Signup() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -40,11 +47,11 @@ export default function Signup() {
                 <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div className="space-y-2">
-                            <Label htmlFor="username" className="text-yellow-300">Username</Label>
+                            <Label htmlFor="username" className="text-yellow-300 text-[12px]">Username</Label>
                             <Input
                                 id="username"
                                 type="text"
-                                placeholder="Choose a username"
+                                placeholder="Enter your username"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
@@ -53,7 +60,7 @@ export default function Signup() {
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="email" className="text-yellow-300">Email</Label>
+                            <Label htmlFor="email" className="text-yellow-300 text-[12px]">Email</Label>
                             <Input
                                 id="email"
                                 type="email"
@@ -66,7 +73,7 @@ export default function Signup() {
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="password" className="text-yellow-300">Password</Label>
+                            <Label htmlFor="password" className="text-yellow-300 text-[12px]">Password</Label>
                             <div className="relative">
                                 <Input
                                     id="password"
@@ -89,11 +96,10 @@ export default function Signup() {
                         </div>
 
                         {error && (
-                            <div className="text-sm text-red-500 bg-red-900 p-2 rounded-lg border border-red-600 text-center">
-                                {error instanceof Error ? error.message : "An error occurred"}
-                            </div>
+                            <p className="text-sm text-red-500 p-2 rounded-lg text-center">
+                                {((error as unknown) as ErrorResponse).response?.data?.message || "Something went wrong. Please try again."}
+                            </p>
                         )}
-
                         <Button
                             type="submit"
                             disabled={isPending}
