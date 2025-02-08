@@ -8,7 +8,6 @@ export const useGetExpenses = () => {
     queryKey: ["expenses"],
     queryFn: async () => {
       const response = await apiClient.get("/expense/totals");
-      console.log(response.data);
       return response.data.message;
     },
   });

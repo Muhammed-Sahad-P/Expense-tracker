@@ -48,7 +48,6 @@ export const getUserByUsername = async (username: string) => {
 
   if (!rows.length) return null;
 
-  console.log("📌 User fetched from DB:", rows[0]); // Debugging log
   return rows[0];
 };
 
