@@ -1,3 +1,4 @@
+import { RowDataPacket, ResultSetHeader } from "mysql2";
 import pool from "../config/db";
 
 interface Income {
@@ -8,29 +9,32 @@ interface Income {
 }
 
 // Add an income entry
-export const addIncome = async (income: Income) => {
+export const addIncome = async (income: Income): Promise<number> => {
   const query =
     "INSERT INTO incomes (user_id, amount, source, date) VALUES (?, ?, ?, ?)";
-  const [result]: any = await pool.query(query, [
+  const [result] = await pool.query<ResultSetHeader>(query, [
     income.user_id,
     income.amount,
     income.source,
     income.date,
   ]);
-  return result.insertId;
+  return result.insertId; 
 };
 
 // Get all incomes for a user
-export const getAllIncomes = async (userId: number) => {
+export const getAllIncomes = async (userId: number): Promise<Income[]> => {
   const query = "SELECT * FROM incomes WHERE user_id = ?";
-  const [rows]: any = await pool.query(query, [userId]);
-  return rows;
+  const [rows] = await pool.query<RowDataPacket[]>(query, [userId]);
+  return rows as Income[];
 };
 
 // Check if income exists and belongs to the user
-export const checkIncomeExists = async (incomeId: number, userId: number) => {
-  const query = "SELECT * FROM incomes WHERE id = ? AND user_id = ?";
-  const [result]: any = await pool.query(query, [incomeId, userId]);
+export const checkIncomeExists = async (
+  incomeId: number,
+  userId: number
+): Promise<boolean> => {
+  const query = "SELECT 1 FROM incomes WHERE id = ? AND user_id = ? LIMIT 1";
+  const [result] = await pool.query<RowDataPacket[]>(query, [incomeId, userId]);
   return result.length > 0;
 };
 
@@ -38,11 +42,11 @@ export const checkIncomeExists = async (incomeId: number, userId: number) => {
 export const updateIncome = async (
   incomeId: number,
   userId: number,
-  income: Income
-) => {
+  income: Omit<Income, "user_id">
+): Promise<boolean> => {
   const query =
     "UPDATE incomes SET amount = ?, source = ?, date = ? WHERE id = ? AND user_id = ?";
-  const [result]: any = await pool.query(query, [
+  const [result] = await pool.query<ResultSetHeader>(query, [
     income.amount,
     income.source,
     income.date,
@@ -53,8 +57,11 @@ export const updateIncome = async (
 };
 
 // Delete an income entry
-export const deleteIncome = async (incomeId: number, userId: number) => {
+export const deleteIncome = async (
+  incomeId: number,
+  userId: number
+): Promise<boolean> => {
   const query = "DELETE FROM incomes WHERE id = ? AND user_id = ?";
-  const [result]: any = await pool.query(query, [incomeId, userId]);
+  const [result] = await pool.query<ResultSetHeader>(query, [incomeId, userId]);
   return result.affectedRows > 0;
 };
