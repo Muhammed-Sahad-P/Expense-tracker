@@ -34,7 +34,7 @@ interface PieChartData {
     value: number;
 }
 
-const COLORS = ["#4F46E5", "#818CF8"]; 
+const COLORS = ["#4F46E5", "#818CF8"];
 
 export default function Dashboard() {
     const { data: expenses = [] } = useGetExpenses();
@@ -80,7 +80,7 @@ export default function Dashboard() {
 
     return (
         <div className="flex flex-col p-4 md:p-6 text-center font-poppins bg-white min-h-screen">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-600 mb-4">Expense & Income Overview</h2>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-600 mb-10">Expense & Income Overview</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div>

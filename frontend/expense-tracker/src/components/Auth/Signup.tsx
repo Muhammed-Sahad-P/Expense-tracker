@@ -17,6 +17,7 @@ interface ErrorResponse {
         };
     };
 }
+
 export default function Signup() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -38,16 +39,16 @@ export default function Signup() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-white p-6">
-            <Card className="w-full max-w-md bg-white shadow-lg rounded-xl p-8 border border-gray-700">
-                <CardHeader>
-                    <h2 className="text-3xl font-bold text-center text-indigo-600 mb-2">Create Account</h2>
-                    <p className="text-center text-black text-sm">Join us and start tracking your expenses easily.</p>
+        <div className="flex min-h-screen items-center justify-center bg-white p-6 sm:p-8">
+            <Card className="w-full max-w-md bg-white shadow-lg rounded-xl p-6 sm:p-8 border border-gray-300">
+                <CardHeader className="text-center">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-indigo-600">Create Account</h2>
+                    <p className="text-sm text-gray-600 mt-2">Join us and start tracking your expenses easily.</p>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-5">
+                    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
                         <div className="space-y-2">
-                            <Label htmlFor="username" className="text-indigo-600 text-[12px]">Username</Label>
+                            <Label htmlFor="username" className="text-indigo-600 text-sm sm:text-base">Username</Label>
                             <Input
                                 id="username"
                                 type="text"
@@ -55,12 +56,12 @@ export default function Signup() {
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
-                                className="mt-1 p-3 w-full border rounded-lg bg-white text-black placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                                className="p-3 w-full border rounded-lg bg-white text-black placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="email" className="text-indigo-600 text-[12px]">Email</Label>
+                            <Label htmlFor="email" className="text-indigo-600 text-sm sm:text-base">Email</Label>
                             <Input
                                 id="email"
                                 type="email"
@@ -68,12 +69,12 @@ export default function Signup() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="mt-1 p-3 w-full border rounded-lg bg-white text-black placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                                className="p-3 w-full border rounded-lg bg-white text-black placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="password" className="text-indigo-600 text-[12px]">Password</Label>
+                            <Label htmlFor="password" className="text-indigo-600 text-sm sm:text-base">Password</Label>
                             <div className="relative">
                                 <Input
                                     id="password"
@@ -82,7 +83,7 @@ export default function Signup() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    className="mt-1 p-3 w-full border rounded-lg bg-white text-black placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none pr-10"
+                                    className="p-3 w-full border rounded-lg bg-white text-black placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none pr-10"
                                 />
                                 <button
                                     type="button"
@@ -100,10 +101,11 @@ export default function Signup() {
                                 {((error as unknown) as ErrorResponse).response?.data?.message || "Something went wrong. Please try again."}
                             </p>
                         )}
+
                         <Button
                             type="submit"
                             disabled={isPending}
-                            className="w-full bg-indigo-600 text-gray-900 py-3 rounded-lg font-semibold hover:bg-indigo-600/80 transition"
+                            className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition"
                         >
                             {isPending ? "Creating Account..." : "Sign Up"}
                         </Button>
@@ -112,10 +114,7 @@ export default function Signup() {
                 <CardFooter className="flex justify-center">
                     <p className="text-sm text-black">
                         Already have an account?{" "}
-                        <a
-                            href="/login"
-                            className="text-indigo-600 hover:underline font-medium transition"
-                        >
+                        <a href="/login" className="text-indigo-600 hover:underline font-medium transition">
                             Login
                         </a>
                     </p>
