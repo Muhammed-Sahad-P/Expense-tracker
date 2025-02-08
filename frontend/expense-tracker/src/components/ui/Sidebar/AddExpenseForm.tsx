@@ -24,7 +24,7 @@ export const AddExpenseForm = ({ onSuccess }: { onSuccess: () => void }) => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="p-3 border border-gray-600 bg-[#2A2F36] text-white rounded-md w-full focus:ring-2 focus:ring-[#FAD350] outline-none shadow-sm"
+                className="p-3 border border-black bg-white text-black rounded-md w-full focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm"
             />
             <input
                 type="number"
@@ -32,7 +32,7 @@ export const AddExpenseForm = ({ onSuccess }: { onSuccess: () => void }) => {
                 value={expenseAmount}
                 onChange={(e) => setExpenseAmount(e.target.value)}
                 required
-                className="p-3 border border-gray-600 bg-[#2A2F36] text-white rounded-md w-full focus:ring-2 focus:ring-[#FAD350] outline-none shadow-sm"
+                className="p-3 border border-black bg-white text-black rounded-md w-full focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm"
             />
             <input
                 type="text"
@@ -40,12 +40,12 @@ export const AddExpenseForm = ({ onSuccess }: { onSuccess: () => void }) => {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 required
-                className="p-3 border border-gray-600 bg-[#2A2F36] text-white rounded-md w-full focus:ring-2 focus:ring-[#FAD350] outline-none shadow-sm"
+                className="p-3 border border-black bg-white text-black rounded-md w-full focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm"
             />
             <div className="flex justify-end gap-2">
                 <button
                     type="submit"
-                    className="bg-[#FAD350] text-black font-semibold px-4 py-2 rounded-md hover:bg-[#e5c144] transition"
+                    className="bg-indigo-600 text-black font-semibold px-4 py-2 rounded-md hover:bg-indigo-600/80 transition"
                 >
                     Add Expense
                 </button>

@@ -8,7 +8,7 @@ interface SidebarItemProps {
 }
 
 export const SidebarItem = ({ href, icon, text }: SidebarItemProps) => (
-    <Link href={href} className="flex items-center gap-3 p-3 hover:bg-[#3A4046] rounded-lg transition-all">
+    <Link href={href} className="flex items-center gap-3 p-3 hover:bg-indigo-50 rounded-lg transition-all">
         {icon}
         <span>{text}</span>
     </Link>

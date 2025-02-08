@@ -38,14 +38,14 @@ const EditIncomeForm = ({ income, onClose }: { income: Income; onClose: () => vo
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 max-w-sm w-full mx-auto">
             <input
                 type="text"
                 placeholder="Source"
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
                 required
-                className="p-3 border border-gray-600 bg-[#2A2F36] text-white rounded-md w-full focus:ring-2 focus:ring-[#FAD350] outline-none shadow-sm"
+                className="p-3 border border-gray-600 bg-white text-black rounded-md w-full focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm sm:text-base text-sm"
             />
             <input
                 type="number"
@@ -53,17 +53,18 @@ const EditIncomeForm = ({ income, onClose }: { income: Income; onClose: () => vo
                 value={incomeAmount}
                 onChange={(e) => setIncomeAmount(e.target.value)}
                 required
-                className="p-3 border border-gray-600 bg-[#2A2F36] text-white rounded-md w-full focus:ring-2 focus:ring-[#FAD350] outline-none shadow-sm"
+                className="p-3 border border-gray-600 bg-white text-black rounded-md w-full focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm sm:text-base text-sm"
             />
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-end">
                 <button
                     type="submit"
-                    className="bg-[#FAD350] text-black font-semibold px-4 py-2 rounded-md hover:bg-[#e5c144] transition"
+                    className="bg-indigo-600 text-black font-semibold px-4 sm:px-6 py-2 rounded-md hover:bg-indigo-600/80 transition"
                 >
                     Update Income
                 </button>
             </div>
         </form>
+
     );
 };
 
@@ -101,12 +102,12 @@ export default function IncomeList() {
     };
 
     return (
-        <div className="max-w-lg mx-auto mt-6">
+        <div className="max-w-4xl mx-auto mt-6 p-4">
             <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-                <DialogContent className="bg-[#1D2329] border border-gray-700 text-white shadow-xl rounded-lg max-w-lg p-6">
+                <DialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md bg-white border border-gray-700 text-black shadow-xl rounded-lg p-6 overflow-y-auto max-h-[80vh]">
                     <DialogHeader>
-                        <DialogTitle className="text-[#FAD350] text-lg font-semibold flex items-center gap-2">
-                            <Pencil className="text-[#FAD350]" /> Edit Income
+                        <DialogTitle className="text-indigo-600 text-lg font-semibold flex items-center gap-2">
+                            <Pencil className="text-indigo-600" /> Edit Income
                         </DialogTitle>
                     </DialogHeader>
                     {selectedIncome && (
@@ -119,16 +120,16 @@ export default function IncomeList() {
             </Dialog>
 
             <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-                <DialogContent className="bg-[#1D2329] border border-gray-700 text-white shadow-xl rounded-lg max-w-lg p-6">
+                <DialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md bg-white border border-gray-700 text-black shadow-xl rounded-lg p-6 overflow-y-auto max-h-[80vh]">
                     <DialogHeader>
-                        <DialogTitle className="text-red-500 text-lg font-semibold flex items-center gap-2">
-                            <Trash2 className="text-red-500" /> Delete Income
+                        <DialogTitle className="text-indigo-600 text-lg font-semibold flex items-center gap-2">
+                            <Trash2 className="text-indigo-600" /> Delete Income
                         </DialogTitle>
                     </DialogHeader>
                     <div className="py-4">
-                        <p className="text-gray-300">Are you sure you want to delete this income? This action cannot be undone.</p>
+                        <p className="text-black">Are you sure you want to delete this income? This action cannot be undone.</p>
                     </div>
-                    <DialogFooter className="flex gap-2 justify-end">
+                    <DialogFooter className="flex gap-2 justify-end mt-4">
                         <button
                             onClick={() => setIsDeleteDialogOpen(false)}
                             className="px-4 py-2 rounded-md bg-gray-600 text-white hover:bg-gray-700 transition"
@@ -137,7 +138,7 @@ export default function IncomeList() {
                         </button>
                         <button
                             onClick={confirmDelete}
-                            className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
+                            className="px-4 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 transition"
                         >
                             Delete
                         </button>
@@ -147,35 +148,27 @@ export default function IncomeList() {
 
             <ul className="space-y-3">
                 {incomes.map((income: Income) => (
-                    <li key={income.id} className="bg-[#3A4046] shadow-lg rounded-lg p-2 flex items-center justify-between">
-                        <div>
-                            <p className="text-white text-sm font-semibold">{income.description}</p>
+                    <li key={income.id} className="bg-white shadow-xl rounded-lg p-4 flex flex-col sm:flex-row sm:justify-between gap-3">
+                        <div className="flex-1">
+                            <p className="text-black text-sm font-semibold">{income.description}</p>
                             <p className="text-black flex items-center gap-2 text-sm">
-                                <Calendar className="text-[#FAD350]" size={16} />
+                                <Calendar className="text-indigo-600" size={16} />
                                 {new Date(income.date).toLocaleDateString()}
                             </p>
                         </div>
-                        <div className="flex items-center gap-4">
-                            <div>
-                                <span className="bg-blue-100 text-green-600 text-[10px] p-1 rounded-md flex items-center gap-1">
-                                    <Tag size={12} /> {income.source}
-                                </span>
-                                <p className="text-md font-poppins text-white">₹{income.amount}</p>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <button
-                                    className="p-1 hover:bg-gray-700 rounded-full transition-colors"
-                                    onClick={() => { }}
-                                >
-                                    <Pencil onClick={() => handleEdit(income)} className="text-[#FAD350]" size={16} />
-                                </button>
-                                <button
-                                    className="p-1 hover:bg-gray-700 rounded-full transition-colors"
-                                    onClick={() => { }}
-                                >
-                                    <Trash2 onClick={() => handleDelete(income.id)} className="text-red-500" size={16} />
-                                </button>
-                            </div>
+                        <div className="flex items-center gap-2">
+                            <span className="bg-blue-100 text-green-600 text-xs p-1 rounded-md flex items-center gap-1">
+                                <Tag size={12} /> {income.source}
+                            </span>
+                            <p className="text-md font-poppins text-black">₹{income.amount}</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button onClick={() => handleEdit(income)} className="hover:bg-gray-100 p-1 rounded-full">
+                                <Pencil className="text-indigo-600" size={16} />
+                            </button>
+                            <button onClick={() => handleDelete(income.id)} className="hover:bg-gray-100 p-1 rounded-full">
+                                <Trash2 className="text-red-500" size={16} />
+                            </button>
                         </div>
                     </li>
                 ))}

@@ -41,14 +41,14 @@ const EditExpenseForm = ({ expense, onClose }: { expense: Expense; onClose: () =
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
             <input
                 type="text"
                 placeholder="Description"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="p-3 border border-gray-600 bg-[#2A2F36] text-white rounded-md w-full focus:ring-2 focus:ring-[#FAD350] outline-none shadow-sm"
+                className="p-2 border border-gray-600 bg-white text-black rounded-md w-full focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm"
             />
             <input
                 type="number"
@@ -56,7 +56,7 @@ const EditExpenseForm = ({ expense, onClose }: { expense: Expense; onClose: () =
                 value={expenseAmount}
                 onChange={(e) => setExpenseAmount(e.target.value)}
                 required
-                className="p-3 border border-gray-600 bg-[#2A2F36] text-white rounded-md w-full focus:ring-2 focus:ring-[#FAD350] outline-none shadow-sm"
+                className="p-2 border border-gray-600 bg-white text-black rounded-md w-full focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm"
             />
             <input
                 type="text"
@@ -64,12 +64,12 @@ const EditExpenseForm = ({ expense, onClose }: { expense: Expense; onClose: () =
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 required
-                className="p-3 border border-gray-600 bg-[#2A2F36] text-white rounded-md w-full focus:ring-2 focus:ring-[#FAD350] outline-none shadow-sm"
+                className="p-2 border border-gray-600 bg-white text-black rounded-md w-full focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm"
             />
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-end">
                 <button
                     type="submit"
-                    className="bg-[#FAD350] text-black font-semibold px-4 py-2 rounded-md hover:bg-[#e5c144] transition"
+                    className="bg-indigo-600 text-black font-semibold px-3 py-2 rounded-md hover:bg-indigo-600/80 transition"
                 >
                     Update Expense
                 </button>
@@ -112,12 +112,12 @@ export default function ExpenseList() {
     };
 
     return (
-        <div className="max-w-lg mx-auto mt-6">
+        <div className="max-w-4xl mx-auto mt-6 p-4">
             <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-                <DialogContent className="bg-[#1D2329] border border-gray-700 text-white shadow-xl rounded-lg max-w-lg p-6">
-                    <DialogHeader>
-                        <DialogTitle className="text-[#FAD350] text-lg font-semibold flex items-center gap-2">
-                            <Pencil className="text-[#FAD350]" /> Edit Expense
+            <DialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md bg-white border border-gray-700 text-black shadow-xl rounded-lg p-6 overflow-y-auto max-h-[80vh]">
+            <DialogHeader>
+                        <DialogTitle className="text-indigo-600 text-lg font-semibold flex items-center gap-2">
+                            <Pencil className="text-indigo-600" /> Edit Expense
                         </DialogTitle>
                     </DialogHeader>
                     {selectedExpense && (
@@ -130,16 +130,16 @@ export default function ExpenseList() {
             </Dialog>
 
             <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-                <DialogContent className="bg-[#1D2329] border border-gray-700 text-white shadow-xl rounded-lg max-w-lg p-6">
-                    <DialogHeader>
-                        <DialogTitle className="text-red-500 text-lg font-semibold flex items-center gap-2">
-                            <Trash2 className="text-red-500" /> Delete Expense
+            <DialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md bg-white border border-gray-700 text-black shadow-xl rounded-lg p-6 overflow-y-auto max-h-[80vh]">
+            <DialogHeader>
+                        <DialogTitle className="text-indigo-600 text-lg font-semibold flex items-center gap-2">
+                            <Trash2 className="text-indigo-600" /> Delete Expense
                         </DialogTitle>
                     </DialogHeader>
-                    <div className="py-4">
-                        <p className="text-gray-300">Are you sure you want to delete this expense? This action cannot be undone.</p>
+                    <div className="py-4 text-md">
+                        <p className="text-black">Are you sure you want to delete this expense? This action cannot be undone.</p>
                     </div>
-                    <DialogFooter className="flex gap-2 justify-end">
+                    <DialogFooter className="flex gap-2 justify-end mt-4">
                         <button
                             onClick={() => setIsDeleteDialogOpen(false)}
                             className="px-4 py-2 rounded-md bg-gray-600 text-white hover:bg-gray-700 transition"
@@ -148,7 +148,7 @@ export default function ExpenseList() {
                         </button>
                         <button
                             onClick={confirmDelete}
-                            className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
+                            className="px-4 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 transition"
                         >
                             Delete
                         </button>
@@ -158,37 +158,25 @@ export default function ExpenseList() {
 
             <ul className="space-y-3">
                 {expenses.map((expense: Expense) => (
-                    <li key={expense.id} className="bg-[#3A4046] shadow-lg rounded-lg p-2 flex items-center justify-between">
-                        <div>
-                            <p className="text-white text-sm font-semibold flex items-center gap-2">
-                                <CreditCard className="text-red-500" size={16} /> {expense.description}
+                    <li key={expense.id} className="bg-white shadow-xl rounded-lg p-4 flex flex-col sm:flex-row sm:justify-between gap-3">
+                        <div className="flex-1">
+                            <p className="text-black text-sm font-semibold flex items-center gap-2">
+                                <CreditCard className="text-indigo-600" size={16} /> {expense.description}
                             </p>
                             <p className="text-black flex items-center gap-2 text-sm">
-                                <Calendar className="text-[#FAD350]" size={16} />
+                                <Calendar className="text-indigo-600" size={16} />
                                 {new Date(expense.date).toLocaleDateString()}
                             </p>
                         </div>
-                        <div className="flex items-center gap-4">
-                            <div>
-                                <span className="bg-blue-100 text-red-600 text-[10px] p-1 rounded-md flex items-center gap-1">
-                                    <Tag size={12} /> {expense.category}
-                                </span>
-                                <p className="text-md font-poppins text-white">₹{expense.amount}</p>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <button
-                                    className="p-1 hover:bg-gray-700 rounded-full transition-colors"
-                                    onClick={() => handleEdit(expense)}
-                                >
-                                    <Pencil className="text-[#FAD350]" size={16} />
-                                </button>
-                                <button
-                                    className="p-1 hover:bg-gray-700 rounded-full transition-colors"
-                                    onClick={() => handleDelete(expense.id)}
-                                >
-                                    <Trash2 className="text-red-500" size={16} />
-                                </button>
-                            </div>
+                        <div className="flex items-center gap-2">
+                            <span className="bg-blue-100 text-red-600 text-xs p-1 rounded-md flex items-center gap-1">
+                                <Tag size={12} /> {expense.category}
+                            </span>
+                            <p className="text-md font-poppins text-black">₹{expense.amount}</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button onClick={() => handleEdit(expense)}><Pencil className="text-indigo-600" size={16} /></button>
+                            <button onClick={() => handleDelete(expense.id)}><Trash2 className="text-red-500" size={16} /></button>
                         </div>
                     </li>
                 ))}

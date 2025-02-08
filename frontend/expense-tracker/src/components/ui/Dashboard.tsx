@@ -34,7 +34,7 @@ interface PieChartData {
     value: number;
 }
 
-const COLORS = ["#16A34A", "#DC2626"];
+const COLORS = ["#4F46E5", "#818CF8"]; 
 
 export default function Dashboard() {
     const { data: expenses = [] } = useGetExpenses();
@@ -79,28 +79,28 @@ export default function Dashboard() {
     const barData = processMonthlyData();
 
     return (
-        <div className="flex flex-col p-6 text-center font-poppins bg-[#3A4046] h-[calc(100vh-4rem)]">
-            <h2 className="text-3xl font-extrabold text-[#FAD350] mb-2">Expense & Income Overview</h2>
+        <div className="flex flex-col p-4 md:p-6 text-center font-poppins bg-white min-h-screen">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-600 mb-4">Expense & Income Overview</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div>
-                    <h2 className="text-base font-semibold text-[#FAD350] mb-2">Recent Incomes</h2>
-                    <div className="bg-[#1D2329] shadow-lg rounded-xl p-4 max-h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
+                    <h2 className="text-base font-semibold text-indigo-600 mb-2">Recent Incomes</h2>
+                    <div className="bg-white shadow-lg rounded-xl p-4 max-h-[200px] overflow-y-auto border border-indigo-100">
                         <IncomeList />
                     </div>
                 </div>
 
                 <div>
-                    <h2 className="text-base font-semibold text-[#FAD350] mb-2">Recent Expenses</h2>
-                    <div className="bg-[#1D2329] shadow-lg rounded-xl p-4 max-h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
+                    <h2 className="text-base font-semibold text-indigo-600 mb-2">Recent Expenses</h2>
+                    <div className="bg-white shadow-lg rounded-xl p-4 max-h-[200px] overflow-y-auto border border-indigo-100">
                         <ExpenseList />
                     </div>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 mt-6">
-                <div className="bg-[#1D2329] shadow-lg rounded-xl p-6 flex flex-col items-center justify-center h-[350px]">
-                    <h2 className="text-xl font-semibold text-[#FAD350] mb-4">Income vs Expenses Breakdown</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 flex-1 mt-4 md:mt-6">
+                <div className="bg-white shadow-lg rounded-xl p-4 md:p-6 flex flex-col items-center justify-center h-[350px] border border-indigo-100">
+                    <h2 className="text-lg md:text-xl font-semibold text-indigo-600 mb-4">Income vs Expenses Breakdown</h2>
                     <ResponsiveContainer width="100%" height={250}>
                         <PieChart>
                             <Pie
@@ -130,12 +130,12 @@ export default function Dashboard() {
                     </ResponsiveContainer>
                 </div>
 
-                <div className="bg-[#1D2329] shadow-lg rounded-xl p-6 flex flex-col items-center justify-center h-[350px]">
-                    <h2 className="text-xl font-semibold text-[#FAD350] mb-4">Monthly Income vs Expenses</h2>
+                <div className="bg-white shadow-lg rounded-xl p-4 md:p-6 flex flex-col items-center justify-center h-[350px] border border-indigo-100">
+                    <h2 className="text-lg md:text-xl font-semibold text-indigo-600 mb-4">Monthly Income vs Expenses</h2>
                     <ResponsiveContainer width="100%" height={250}>
                         <BarChart data={barData}>
-                            <XAxis dataKey="name" stroke="#8884d8" />
-                            <YAxis />
+                            <XAxis dataKey="name" stroke="#4F46E5" />
+                            <YAxis stroke="#4F46E5" />
                             <Tooltip
                                 formatter={(value: number) => `₹${value.toLocaleString()}`}
                             />
@@ -154,12 +154,12 @@ export default function Dashboard() {
                             />
                             <defs>
                                 <linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stopColor="#16A34A" stopOpacity={0.9} />
-                                    <stop offset="100%" stopColor="#16A34A" stopOpacity={0.4} />
+                                    <stop offset="0%" stopColor="#4F46E5" stopOpacity={0.9} />
+                                    <stop offset="100%" stopColor="#4F46E5" stopOpacity={0.4} />
                                 </linearGradient>
                                 <linearGradient id="expensesGradient" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stopColor="#DC2626" stopOpacity={0.9} />
-                                    <stop offset="100%" stopColor="#DC2626" stopOpacity={0.4} />
+                                    <stop offset="0%" stopColor="#818CF8" stopOpacity={0.9} />
+                                    <stop offset="100%" stopColor="#818CF8" stopOpacity={0.4} />
                                 </linearGradient>
                             </defs>
                         </BarChart>
