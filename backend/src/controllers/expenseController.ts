@@ -51,7 +51,6 @@ export const updateExpense = async (req: CustomRequest, res: Response) => {
 
   await expenseModel.updateExpense(expenseId, userId, {
     ...validatedData.data,
-    user_id: userId,
   });
 
   res.status(200).json(new StandardResponse("Expense updated successfully"));
@@ -65,7 +64,7 @@ export const getAllExpenses = async (req: CustomRequest, res: Response) => {
   }
 
   const expenses = await expenseModel.getAllExpenses(userId);
-  res.status(200).json(new StandardResponse(expenses));
+  res.status(200).json(new StandardResponse(JSON.stringify(expenses)));
 };
 
 // Delete an expense

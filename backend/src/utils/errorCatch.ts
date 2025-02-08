@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
-const errorCatch = <T>(
-  fn: (req: Request, res: Response, next: NextFunction) => Promise<T>
+const errorCatch = (
+  fn: (req: Request, res: Response, next: NextFunction) => Promise<any>
 ) => {
   return (req: Request, res: Response, next: NextFunction) => {
     fn(req, res, next).catch(next);
