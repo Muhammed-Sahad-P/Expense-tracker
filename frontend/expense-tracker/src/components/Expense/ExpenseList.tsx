@@ -114,8 +114,8 @@ export default function ExpenseList() {
     return (
         <div className="max-w-4xl mx-auto mt-6 p-4">
             <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-            <DialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md bg-white border border-gray-700 text-black shadow-xl rounded-lg p-6 overflow-y-auto max-h-[80vh]">
-            <DialogHeader>
+                <DialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md bg-white border border-gray-700 text-black shadow-xl rounded-lg p-6 overflow-y-auto max-h-[80vh]">
+                    <DialogHeader>
                         <DialogTitle className="text-indigo-600 text-lg font-semibold flex items-center gap-2">
                             <Pencil className="text-indigo-600" /> Edit Expense
                         </DialogTitle>
@@ -130,8 +130,8 @@ export default function ExpenseList() {
             </Dialog>
 
             <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-            <DialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md bg-white border border-gray-700 text-black shadow-xl rounded-lg p-6 overflow-y-auto max-h-[80vh]">
-            <DialogHeader>
+                <DialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md bg-white border border-gray-700 text-black shadow-xl rounded-lg p-6 overflow-y-auto max-h-[80vh]">
+                    <DialogHeader>
                         <DialogTitle className="text-indigo-600 text-lg font-semibold flex items-center gap-2">
                             <Trash2 className="text-indigo-600" /> Delete Expense
                         </DialogTitle>

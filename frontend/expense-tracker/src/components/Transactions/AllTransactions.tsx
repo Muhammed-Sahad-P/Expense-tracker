@@ -25,6 +25,7 @@ interface Expense {
 
 interface Transaction extends Income, Expense {
     type: "income" | "expense";
+    uniqueId: string; 
 }
 
 export default function AllTransactions() {
@@ -37,11 +38,13 @@ export default function AllTransactions() {
     const formattedExpenses = expenses.map((expense: Expense) => ({
         ...expense,
         type: "expense",
+        uniqueId: `expense-${expense.id}`,
     }));
 
     const formattedIncomes = incomes.map((income: Income) => ({
         ...income,
         type: "income",
+        uniqueId: `income-${income.id}`,
     }));
 
     const transactions: Transaction[] = [...formattedExpenses, ...formattedIncomes]
@@ -138,7 +141,7 @@ export default function AllTransactions() {
                                     const isIncome = transaction.type === "income";
                                     return (
                                         <div
-                                            key={transaction.id}
+                                            key={transaction.uniqueId}
                                             className="group relative overflow-hidden"
                                         >
                                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-50/30 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />

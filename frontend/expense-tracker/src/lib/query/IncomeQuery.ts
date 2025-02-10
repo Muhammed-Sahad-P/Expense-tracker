@@ -8,7 +8,7 @@ export const useGetIncomes = () => {
     queryKey: ["incomes"],
     queryFn: async () => {
       const response = await apiClient.get("/income");
-      return response.data.message;
+      return response.data.data;
     },
   });
 };
