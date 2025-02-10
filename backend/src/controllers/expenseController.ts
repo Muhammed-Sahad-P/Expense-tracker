@@ -64,7 +64,9 @@ export const getAllExpenses = async (req: CustomRequest, res: Response) => {
   }
 
   const expenses = await expenseModel.getAllExpenses(userId);
-  res.status(200).json(new StandardResponse(JSON.stringify(expenses)));
+  res
+    .status(200)
+    .json(new StandardResponse("Expenses fetched successfully", expenses));
 };
 
 // Delete an expense

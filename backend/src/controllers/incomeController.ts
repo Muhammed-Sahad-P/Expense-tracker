@@ -31,7 +31,7 @@ export const addIncome = async (req: CustomRequest, res: Response) => {
 export const getAllIncomes = async (req: CustomRequest, res: Response) => {
   const userId = Number(req.userId);
   const incomes = await incomeModel.getAllIncomes(userId);
-  res.status(200).json(new StandardResponse(JSON.stringify(incomes)));
+  res.status(200).json(new StandardResponse('Incomes fetched successfully', incomes));
 };
 
 // Update income
