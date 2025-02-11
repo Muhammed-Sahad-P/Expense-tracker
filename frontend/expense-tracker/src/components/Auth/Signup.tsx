@@ -39,16 +39,16 @@ export default function Signup() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-white p-6 sm:p-8">
-            <Card className="w-full max-w-md bg-white shadow-lg rounded-xl p-6 sm:p-8 border border-gray-300">
+        <div className="flex min-h-screen items-center justify-center bg-white p-2 sm:p-4 md:p-6">
+            <Card className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white shadow-lg rounded-2xl p-6 sm:p-8 border border-gray-300">
                 <CardHeader className="text-center">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-indigo-600">Create Account</h2>
-                    <p className="text-sm text-gray-600 mt-2">Join us and start tracking your expenses easily.</p>
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-indigo-600">Create Account</h2>
+                    <p className="text-xs sm:text-sm md:text-base text-gray-600 mt-2">Join us and start tracking your expenses easily.</p>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
                         <div className="space-y-2">
-                            <Label htmlFor="username" className="text-indigo-600 text-sm sm:text-base">Username</Label>
+                            <Label htmlFor="username" className="text-indigo-600 text-sm md:text-base">Username</Label>
                             <Input
                                 id="username"
                                 type="text"
@@ -61,7 +61,7 @@ export default function Signup() {
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="email" className="text-indigo-600 text-sm sm:text-base">Email</Label>
+                            <Label htmlFor="email" className="text-indigo-600 text-sm md:text-base">Email</Label>
                             <Input
                                 id="email"
                                 type="email"
@@ -74,7 +74,7 @@ export default function Signup() {
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="password" className="text-indigo-600 text-sm sm:text-base">Password</Label>
+                            <Label htmlFor="password" className="text-indigo-600 text-sm md:text-base">Password</Label>
                             <div className="relative">
                                 <Input
                                     id="password"
@@ -88,7 +88,7 @@ export default function Signup() {
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-black hover:text-indigo-600 transition"
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-600 transition"
                                     tabIndex={-1}
                                 >
                                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
